@@ -55,17 +55,7 @@ public class UserService {
 	 */
 	public static List<GroupResult> loadSortedUserGroup() throws IOException, ParseException, JSONException{
 		
-		// Step1: Load the users list
-		
-		// Step2: Sort the user list 
-
-		// Write an algorithm here to sort the list of users 
-		// First based on the first name and then last name
-		// Eg. if the users are John Doe, John Wayne and Clint Eastwood, the list should be 
-		// 1.Clint Eastwood, 
-		// 2. John Doe
-		// 3. John Wayne 
-		
+		// TODO: Load the user and group them by last name, count adult and children and then return the list sorted by last name.
 		return new ArrayList<>();
 	}
 	
