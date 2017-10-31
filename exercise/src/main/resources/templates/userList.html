@@ -3,41 +3,32 @@
 <head>
     <title>Spring Core Online Tutorial - List users</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-
-    <link href="../css/spring-core.css"
-          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+	<link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 </head>
 <body>
-<div class="container">
-       <h2>Residents of Lausanne Commune</h2>
-       <table class="table table-striped">
-           <tr>
-               <th>Id</th>
-               <th>First name</th>
-               <th>Last name</th>
-               <th>Email</th>
-               <th>Date of birth</th>
-               <th>Mobile</th>
-               <th>Town</th>
-           </tr>
-           <tr th:each="user: ${users}">
-               <td th:text="${user.id}"></td>
-               <td th:text="${user.firstname}"></td>
-               <td th:text="${user.lastname}"></td>
-               <td th:text="${user.email}"></td>
-               <td th:text="${#dates.format(user.dateOfBirth, 'dd-MMM-yyyy')}"></td>
-               <td th:text="${user.mobile}"></td>
-               <td th:text="${user.town}"></td>
-           </tr>
-       </table>
-</div>
-
+	<script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
+	<div class="container">
+	       <h2>Residents of Lausanne Commune</h2>
+	       <table class="table table-striped">
+	           <tr>
+	               <th>Id</th>
+	               <th>First name</th>
+	               <th>Last name</th>
+	               <th>Email</th>
+	               <th>Date of birth</th>
+	               <th>Mobile</th>
+	               <th>Town</th>
+	           </tr>
+	           <tr th:each="user: ${users}">
+	               <td th:text="${user.id}"></td>
+	               <td th:text="${user.firstname}"></td>
+	               <td th:text="${user.lastname}"></td>
+	               <td th:text="${user.email}"></td>
+	               <td th:text="${#dates.format(user.dateOfBirth, 'dd-MMM-yyyy')}"></td>
+	               <td th:text="${user.mobile}"></td>
+	               <td th:text="${user.town}"></td>
+	           </tr>
+	       </table>
+	</div>
 </body>
 </html>
