@@ -2,13 +2,24 @@ package com.example.exercise.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
+	@JsonProperty("id")
 	private String id;
+	@JsonProperty("firstname")
 	private String firstname; 
+	@JsonProperty("lastname")
 	private String lastname; 
+	@JsonProperty("email")
 	private String email; 
+	@JsonProperty("dateOfBirth")
 	private Date dateOfBirth; 
+	@JsonProperty("mobile")
 	private String mobile;
+	@JsonProperty("town")
 	private String town;
 	
 	public User() {

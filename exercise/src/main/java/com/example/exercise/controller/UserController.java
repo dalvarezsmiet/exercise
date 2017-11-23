@@ -53,9 +53,10 @@ public class UserController {
 	     * @return
 	     * @throws IOException
 	     * @throws ParseException
+	     * @throws ExecutionException 
 	     */
 	    @RequestMapping(method = RequestMethod.GET, path="/sortedUserlist")
-	    public String getSortedUserList(final Model model) throws IOException, ParseException{
+	    public String getSortedUserList(final Model model) throws IOException, ParseException, ExecutionException{
 	    	try {
 	    		final List<GroupResult> groups = UserService.loadSortedUserGroup();
 				model.addAttribute("groups", groups);
@@ -73,9 +74,10 @@ public class UserController {
 	     * @throws JSONException
 	     * @throws IOException
 	     * @throws ParseException
+	     * @throws ExecutionException 
 	     */
 	    @RequestMapping(method = RequestMethod.GET, path="/checkUser")
-	    public String checkUser(@RequestParam(value="email") String email, final Model model) throws JSONException, IOException, ParseException {
+	    public String checkUser(@RequestParam(value="email") String email, final Model model) throws JSONException, IOException, ParseException, ExecutionException {
 	    	// Add some email validator and if not a valid email pass a message in error variable
 	    	// ex. 	 model.addAttribute("error", "This is not a valid email address");
 	    	// else call the search service
