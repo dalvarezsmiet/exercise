@@ -95,8 +95,10 @@ public class UserService {
         try
         {
             // Step1: Read the user.json file
-	    //TODO: This is hard-coded and totally ugly. Has to be changed to a relative path that works!
-            json = FileUtils.readFileToString(new File("C:\\Users\\damian\\develop\\exercise\\exercise\\user.json"));
+        	final ClassLoader loader = UserService.class.getClassLoader();
+        	URI pathFile = loader.getResource("user.json").toURI();
+        	json = FileUtils.readFileToString(new File(pathFile));
+            
             // Step2: Convert the user JSON string to java object     
             User[] userDetails = mapper.readValue(json, User[].class);
             
@@ -104,7 +106,7 @@ public class UserService {
             for (User user : userDetails) {
             	System.out.println(user);
             	userList.add(user);
-			}
+		}
         } catch (JsonParseException e)
         {
             e.printStackTrace();
