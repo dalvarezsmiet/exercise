@@ -3,7 +3,10 @@ package com.example.exercise.service;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -85,8 +88,9 @@ public class UserService {
 	 * @throws JsonParseException
 	 * @throws JsonMappingException
 	 * @throws IOException
+	 * @throws URISyntaxException 
 	 */
-	public static List<User> loadUserIfCacheMiss() throws JsonParseException, JsonMappingException, IOException {
+	public static List<User> loadUserIfCacheMiss() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
         List<User> userList = new ArrayList<User>();
 		String json="";
         //Create a new ObjectMapper, for mapping data
@@ -99,14 +103,14 @@ public class UserService {
         	URI pathFile = loader.getResource("user.json").toURI();
         	json = FileUtils.readFileToString(new File(pathFile));
             
-            // Step2: Convert the user JSON string to java object     
+        	// Step2: Convert the user JSON string to java object     
             User[] userDetails = mapper.readValue(json, User[].class);
             
             //Print the user details
             for (User user : userDetails) {
             	System.out.println(user);
             	userList.add(user);
-		}
+			}
         } catch (JsonParseException e)
         {
             e.printStackTrace();
@@ -141,7 +145,7 @@ public class UserService {
 		TreeMap<String, GroupResult> map = new TreeMap<String, GroupResult>();
 		
 		for (User user : users) {
-			Boolean adult = getAge(user.getDateOfBirth()) > 18;
+			Boolean adult = getAge(user.getDateOfBirth()) >= 18;
 			
 			
 			GroupResult group = map.get(user.getLastname());
@@ -171,13 +175,16 @@ public class UserService {
 		return groupResults;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static int getAge(Date birthDate) {
-	    long ageInMillis = new Date().getTime() - birthDate.getTime();
+		Calendar rightNow = Calendar.getInstance();
 
-	    Date age = new Date(ageInMillis);
+		long ageInMillis = rightNow.getTimeInMillis() - birthDate.getTime();
 
-	    return age.getYear();
+		Calendar c = Calendar.getInstance();
+		
+		c.setTimeInMillis(ageInMillis);
+		
+	    return c.get(Calendar.YEAR) - 1970;
 	}
 
 	/**
